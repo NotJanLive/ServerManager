@@ -1,4 +1,5 @@
-import os, requests 
+from ensurepip import version
+import os, requests      
 def get_version(version):
     if version == "1.8":
         download(8)
@@ -9,7 +10,9 @@ def get_version(version):
     elif version == "1.18":
         download(18)
     elif version == "1.19":
-        download(19);    
+        download(19)
+    elif version == "Bungeecord":
+        download(1)      
     else:
         print("Diese Version existiert nicht!")
         exit()
@@ -40,18 +43,25 @@ def download(wanted_version):
         print("Lade nötige Dateien herunter...")
         response = requests.get("https://download.getbukkit.org/spigot/spigot-1.19.jar")
         open("server.jar", "wb").write(response.content)
+    elif wanted_version == 1:
+        os.system("cls")
+        print("Lade nötige Dateien herunter...")
+        response = requests.get("https://ci.md-5.net/job/BungeeCord/lastSuccessfulBuild/artifact/bootstrap/target/BungeeCord.jar")
+        open("server.jar", "wb").write(response.content)   
         
 def setup_server(ram):
     ram = int(ram)
     os.system("cls")
-    print("Setze alle für dich auf...")
+    print("Setze alles für dich auf...")
     start_server(ram)
-    os.system("cls")
-    print("Akzeptiere die EULA für dich")
-    os.remove("eula.txt")
-    with open('eula.txt', 'w') as f:
-        f.write('eula=true')
-        f.close()
+    version = get_version
+    if not version == "bungeecord":
+        os.system("cls")
+        print("Akzeptiere die EULA für dich")
+        os.remove("eula.txt")
+        with open('eula.txt', 'w') as f:
+            f.write('eula=true')
+            f.close()
     write_start_file(ram)
     start_server(ram)
 
@@ -67,13 +77,14 @@ def main():
     os.system("cls")
     print("\nAuf welcher Version soll dein Minecraft-Server laufen?")
     print("""
-##############
-#    1.8     #
-#    1.12    #
-#    1.16    #
-#    1.18    #
-#    1.19    #  
-##############  
+###################
+#       1.8       #
+#       1.12      #
+#       1.16      #
+#       1.18      #
+#       1.19      #  
+#    Bungeecord   #
+################### 
 """)
     version = input(">>>")
     get_version(version)
