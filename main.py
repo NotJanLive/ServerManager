@@ -1,5 +1,5 @@
 from ensurepip import version
-import os, requests      
+import os, requests 
 def get_version(version):
     if version == "1.8":
         download(8)
@@ -47,10 +47,10 @@ def download(wanted_version):
         os.system("cls")
         print("Lade nötige Dateien herunter...")
         response = requests.get("https://ci.md-5.net/job/BungeeCord/lastSuccessfulBuild/artifact/bootstrap/target/BungeeCord.jar")
-        open("server.jar", "wb").write(response.content)   
+        open("server.jar", "wb").write(response.content) 
         
 def setup_server(ram):
-    ram = int(ram)
+    ram = int(ram) 
     os.system("cls")
     print("Setze alles für dich auf...")
     start_server(ram)
@@ -87,6 +87,10 @@ def main():
 ################### 
 """)
     version = input(">>>")
+    dir = version + " Server"
+    os.mkdir(dir)
+    path = os.path.dirname(os.path.abspath(__file__)) + "\\" + version + " Server"
+    os.chdir(path)
     get_version(version)
     os.system("cls")
     print("Wie viel RAM soll dein server haben? (4GB ist empfohlen)")
