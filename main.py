@@ -89,7 +89,7 @@ def main():
     version = input(">>>")
     dir = version + " Server"
     os.mkdir(dir)
-    path = os.path.dirname(os.path.abspath(__file__)) + "\\" + version + " Server"
+    path = os.getcwd() + "\\" + version + " Server"
     os.chdir(path)
     get_version(version)
     os.system("cls")
